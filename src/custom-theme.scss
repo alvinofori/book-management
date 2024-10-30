@@ -1,0 +1,15 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$my-theme: mat.define-theme((
+ color: (
+    theme-type: light,
+    primary: mat.$violet-palette,
+  ),
+));
+
+html {
+  @include mat.core-theme($my-theme);
+  @include mat.button-theme($my-theme);
+}

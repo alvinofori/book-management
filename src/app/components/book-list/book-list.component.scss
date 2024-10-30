@@ -1,0 +1,52 @@
+.page-title {
+    text-align: center;
+}
+.search-container {
+    margin: 0 auto;
+    display: table;
+}
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    .add-container {
+        display: table;
+        margin-left: auto;
+        margin-bottom: 15px;
+    }
+
+    .book-list-container {
+        table {
+            width: 100%;
+        }
+        .mat-column-options {
+            width: 134px;
+        }
+        
+        .mat-column-year {
+            width: 85px;
+        }
+        .mat-column-author{ 
+            width: 250px;
+        }
+        .mat-column-title{ 
+            width: 250px;
+        }
+
+        .options-panel {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+
+            mat-icon {
+                cursor: pointer;
+            }
+        }
+
+        .delete-button{
+            color:red;
+        }
+        max-width: 100%;
+        overflow: auto;
+        margin: auto;
+    }
+}

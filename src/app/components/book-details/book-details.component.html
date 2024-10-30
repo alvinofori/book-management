@@ -1,0 +1,64 @@
+
+@if (book$ | async; as book) {
+    <form [formGroup]="bookForm">
+    <mat-dialog-content class="mat-typography">
+        <h2 class="title-popup">Book Details</h2>
+        <div class="details-popup">
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" [value]="bookForm.get('title')?.value">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Author</mat-label>
+            <input matInput formControlName="author" [value]="bookForm.get('author')?.value">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Year</mat-label>
+            <input matInput type="number" formControlName="year" [value]="bookForm.get('year')?.value">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" [value]="bookForm.get('description')?.value"></textarea>
+        </mat-form-field>
+
+        <div class="image-upload-container">
+            <div class="image-wrapper">
+                <strong>Image:</strong>
+                <label for='imgupload' class="image-upload-label">
+                    <img [src]="bookForm.get('image')?.value || 'assets/placeholder.png'" alt="Book Cover" />
+                    @if (isEditMode) {
+                        <input type="file" id="imgupload" (change)="onFileSelected($event)" style="display: none;" />
+                        <div class="overlay-upload"><span>Upload</span></div>
+                    }
+                </label>
+            </div>
+        </div>
+    </div>
+    </mat-dialog-content>
+    <div class="button-control-wrapper">
+        @if (!isEditMode) {
+            <button class="button-control" mat-flat-button (click)="editBook()" [disabled]="loading$ | async">Edit</button>
+            <button class="button-control" mat-flat-button (click)="close()" [disabled]="loading$ | async">Close</button>
+            <button class="button-control danger" mat-flat-button (click)="deleteBook(book.id)" [disabled]="loading$ | async">
+                @if( loading$ | async ) {
+                    <mat-spinner [diameter]="25" style="margin: 0 auto;"></mat-spinner>
+                } @else {
+                    Delete
+                }
+            </button>
+        } @else {
+            <button class="button-control" mat-flat-button (click)="saveChanges()" [disabled]="!bookForm.valid || (loading$ | async)">
+                @if( loading$ | async ) {
+                    <mat-spinner [diameter]="25" style="margin: 0 auto;"></mat-spinner>
+                } @else {
+                    Save and close
+                }
+            </button>
+        }
+
+    </div>
+</form>
+}
